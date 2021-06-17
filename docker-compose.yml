@@ -1,0 +1,32 @@
+version: "3"
+services:
+  db:
+    image: postgres:13.0
+    network_mode: bridge
+    container_name: db
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    expose:
+      - 5432
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=@p1_F1n@Nc3_Db_Z@77aN1
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=financeBd
+    restart: unless-stopped
+  api:
+    image: finance
+    network_mode: bridge
+    container_name: finance
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    links:
+      - db
+    ports:
+      - 19090:19090
+volumes:
+  postgres-data:
