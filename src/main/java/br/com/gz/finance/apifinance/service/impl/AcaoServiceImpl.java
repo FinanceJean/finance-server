@@ -3,6 +3,7 @@ package br.com.gz.finance.apifinance.service.impl;
 import br.com.gz.finance.apifinance.converter.AcaoDTOConverter;
 import br.com.gz.finance.apifinance.model.Acao;
 import br.com.gz.finance.apifinance.model.AcaoDto;
+import br.com.gz.finance.apifinance.model.Usuario;
 import br.com.gz.finance.apifinance.repository.AcaoRepository;
 import br.com.gz.finance.apifinance.service.AcaoService;
 import br.com.gz.finance.apifinance.service.UsuarioService;
@@ -51,7 +52,7 @@ public class AcaoServiceImpl extends CrudServiceImpl<Acao, Long>
 
     @Override
     public List<AcaoDto> findAllAcaoByUsuario(String username) {
-        var user = usuarioService.findUsuarioByUsername(username);
+        Usuario user = usuarioService.findUsuarioByUsername(username);
         if (Objects.isNull(user))
             return null;
 

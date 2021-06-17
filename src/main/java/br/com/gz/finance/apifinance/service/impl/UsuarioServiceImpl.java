@@ -91,7 +91,7 @@ public class UsuarioServiceImpl extends CrudServiceImpl<Usuario, Long>
 
     @Override
     public void changeSenha(ChangeSenhaDto changeSenhaDto) {
-        var user = usuarioRepository.findByUsername(changeSenhaDto.getUsername());
+        Usuario user = usuarioRepository.findByUsername(changeSenhaDto.getUsername());
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         if (bCryptPasswordEncoder.matches(changeSenhaDto.getSenhaAtual(), user.getPassword())) {
             user.setPassword(bCryptPasswordEncoder.encode(changeSenhaDto.getNovaSenha()));
@@ -111,7 +111,7 @@ public class UsuarioServiceImpl extends CrudServiceImpl<Usuario, Long>
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        var username = usuarioRepository.findByUsername(s);
+        Usuario username = usuarioRepository.findByUsername(s);
         if (username == null) {
             throw new UsernameNotFoundException("Usuário não encontrado");
         }
